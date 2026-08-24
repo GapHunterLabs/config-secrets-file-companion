@@ -1,0 +1,12 @@
+app:
+  name: acmecorp-orders
+  debug: false
+
+database:
+  host: db.internal.acmecorp.com
+  # Real value pasted in for local testing and never removed -- flagged.
+  password: kX9pL2mQzR7vT4nB8wA1
+
+aws:
+  # Placeholder, not a real key -- not flagged.
+  access-key: changeme
