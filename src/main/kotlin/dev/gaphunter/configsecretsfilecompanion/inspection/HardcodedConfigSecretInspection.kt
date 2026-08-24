@@ -8,6 +8,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import dev.gaphunter.configsecretsfilecompanion.detect.ConfigLineScanner
+import dev.gaphunter.configsecretsfilecompanion.review.ReviewPrompt
 
 /**
  * Flags a suspected real secret (AWS key, GitHub/Slack token, JWT, PEM
@@ -64,6 +65,9 @@ class HardcodedConfigSecretInspection : LocalInspectionTool() {
                 ProblemHighlightType.GENERIC_ERROR_OR_WARNING,
                 isOnTheFly,
             )
+
+            val lineNumber = file.viewProvider.document?.getLineNumber(match.valueStartOffset) ?: -1
+            ReviewPrompt.recordHit(file.project, "${virtualFile.path}:$lineNumber")
         }
 
         return if (problems.isEmpty()) null else problems.toTypedArray()
