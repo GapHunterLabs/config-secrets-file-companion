@@ -63,7 +63,7 @@ object ReviewPrompt {
         val properties = PropertiesComponent.getInstance()
         if (properties.getBoolean(KEY_ANSWERED)) return
 
-        val seen = properties.getValues(KEY_SEEN_FINDINGS)?.toMutableSet() ?: mutableSetOf()
+        val seen = properties.getList(KEY_SEEN_FINDINGS)?.toMutableSet() ?: mutableSetOf()
         if (!seen.add(dedupeKey)) return // already counted this exact finding
 
         if (seen.size > MAX_TRACKED_KEYS) {
@@ -72,7 +72,7 @@ object ReviewPrompt {
             // has long since passed by MAX_TRACKED_KEYS anyway.
             properties.unsetValue(KEY_SEEN_FINDINGS)
         } else {
-            properties.setValues(KEY_SEEN_FINDINGS, seen.toTypedArray())
+            properties.setList(KEY_SEEN_FINDINGS, seen)
         }
 
         if (seen.size == HITS_BEFORE_PROMPT) {
