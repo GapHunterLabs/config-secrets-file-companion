@@ -38,5 +38,6 @@
             enabledByDefault="true"
             level="WARNING"
             implementationClass="dev.gaphunter.configsecretsfilecompanion.inspection.HardcodedConfigSecretInspection"/>
+        <notificationGroup id="Config Secrets File Companion" displayType="BALLOON"/>
     </extensions>
 </idea-plugin>
