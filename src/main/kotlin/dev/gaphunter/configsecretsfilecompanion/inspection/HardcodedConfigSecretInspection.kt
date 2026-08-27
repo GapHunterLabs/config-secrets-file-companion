@@ -73,7 +73,7 @@ class HardcodedConfigSecretInspection : LocalInspectionTool() {
         return if (problems.isEmpty()) null else problems.toTypedArray()
     }
 
-    /** Descends to a real leaf PSI element -- ProblemDescriptor must never anchor on a composite node (SDK_GOTCHAS.md SS20). */
+    /** Descends to a real leaf PSI element -- ProblemDescriptor must never anchor on a composite node. */
     private fun leafElementAt(file: PsiFile, startOffset: Int): PsiElement? {
         if (startOffset < 0 || startOffset >= file.textLength) return null
         var element = file.findElementAt(startOffset) ?: return file
